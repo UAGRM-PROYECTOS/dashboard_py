@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "chart.js": "^4.4.0",
+    "cors": "^2.8.5",
+    "flexmonster": "2.9.64"
+  }
+}

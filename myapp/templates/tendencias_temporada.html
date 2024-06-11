@@ -1,0 +1,70 @@
+<!-- Sección de Lista de Ventas y Gráfico Pastel -->
+<div class="container mt-4  " style="max-width: -webkit-fill-available;">
+  
+  <div class="card-deck" >
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Tendencias de Temporada</h5>
+        <p class="card-text"></p>
+      
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Pronostico de demandas</h5>
+        <p class="card-text">Precisión del Pronóstico de Demanda</p>
+      </div>
+    </div>
+    <!-- Agrega más cards según sea necesario -->
+  </div>
+
+
+</div> 
+<div class="col-md-6">
+     
+  <canvas id="graficoPastel2"></canvas>
+
+</div>
+
+<!--Prdiccion demandas-->
+{% include 'prediccion_demandas.html' %}
+
+<script>
+var dataTendenciaTemporada = {{ data_tendencia_temporada_month|safe }};
+  
+  // Verificar si la variable es un objeto JavaScript
+  if (typeof dataTendenciaTemporada === 'string') {
+      // Convertir la cadena JSON a un objeto JavaScript
+      try {
+          dataTendenciaTemporada = JSON.parse(dataTendenciaTemporada);
+      } catch (e) {
+          console.error('Error al analizar JSON:', e);
+          dataTendenciaTemporada = [];
+      }
+  }
+      
+  // Configuración de gráfico de pastel
+  var datosPastel = {
+      labels: dataTendenciaTemporada.map(item => item.productName),
+      datasets: [{
+          data: dataTendenciaTemporada.map(item => item.percentage),
+          backgroundColor: ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)'],
+          hoverBackgroundColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+      }]
+  };
+
+  // Configuración de los gráficos
+var opciones = {
+responsive: true,
+maintainAspectRatio: false,
+};
+
+
+  
+  var ctxPastel = document.getElementById('graficoPastel2').getContext('2d');
+  new Chart(ctxPastel, {
+      type: 'doughnut',
+      data: datosPastel,
+      options: opciones,
+  });
+</script>

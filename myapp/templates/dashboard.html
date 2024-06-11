@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+   <!-- head -->
+   {% include 'head.html' %}
+  <body>
+    <div class="header bg-dark pb-lg-3">
+      <div class="container-fluid">
+        <div class="header-body">
+          <!-- Navbar -->
+          {% include 'navbar.html' %}
+          <!--Sidebar panel, para agregar filtros a mis graficas de char.js-->
+          <div class="container-fluid">
+            <div class="row">
+              <!--Fin del sidebar-->
+
+              <!--Contenido de la pagina-->
+              <main role="main" class=" ml-sm-auto col-lg-12 ">
+
+                <!-- Card stats -->
+                <div class="row">
+                  <!--ventas total-->
+                  {% include 'ventas_totales.html' %}
+                  <!--Tasa de Obsolencia-->
+                  {% include 'tasa_obsolencia.html' %}
+                  <!--Rotacion Inventario-->
+                  {% include 'rotacion_inventario.html' %}
+                  <!--Valor Inventario-->
+                  {% include 'valor_inventario.html' %}
+
+                </div>
+
+                <!--Analisis de estacionalidad y Nivel de Inventario-->
+                {% include 'analisis_estacionalidad.html' %}
+
+                <!-- Sección de Lista de Ventas y Gráfico Pastel -->
+
+                <div class="row">
+                  <!-- Gráfico Pastel-Tendencias -->
+                  {% include 'tendencias_temporada.html' %}
+                  <!-- Gráfico de Crecimiento Lineal -->
+
+                  <!-- Lista de Ventas -->
+                  {% include 'productos_vencer.html' %}
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      {% load static %}
+    </div>
+    <!-- Configuración de los Gráficos con Chart.js -->
+     <script src="{% static 'graficaschartjs.js' %}"></script>
+
+     <!-- Tendencia-->
+     <!--<script src="{% static 'tendencias_temporada.js' %}"></script>-->
+
+    <!-- Agrega este script al final del cuerpo de tu documento -->
+
+
+    <script src="{% static 'ventastotalporc.js' %}"></script>
+
+    <!--Tendencias Estacionales-->
+    <script src="{% static 'tendendias_estacionales.js' %}"></script>
+   
+ <!-- Pronostico de Demandas-->
+  <script src="{% static 'prediccion_demanda.js' %}"></script>
+
+  </body>
+</html>

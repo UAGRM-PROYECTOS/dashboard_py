@@ -1,0 +1,28 @@
+
+
+  
+<div class="col-md-6">
+       <!--TextField for pass to vies.py the parameter : "fecha_inicio","fecha_final"-->
+
+       <form id="tuFormulario" action="http://34.151.236.58:3000/api/show/prediction" method="GET">
+        <div class="form-group">
+            <label for="fecha_inicio">Fecha Inicio</label>
+            <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" aria-describedby="fecha_inicio" placeholder="Fecha Inicio">
+        </div>
+        <div class="form-group">
+            <label for="fecha_final">Fecha Final</label>
+            <input type="date" class="form-control" id="fecha_final" name="fecha_final" aria-describedby="fecha_final" placeholder="Fecha Final">
+        </div>
+        <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+    </form> 
+    
+
+  
+<div>
+        <canvas id="myChart"></canvas>
+      </div>
+      </div>
+
+    {% load static %}
+<script src="{% static 'url.js' %}"></script>
+<script src="{% static 'prediccion_demanda.js' %}"></script>

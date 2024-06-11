@@ -1,0 +1,99 @@
+<div class="container mt-4  " style="max-width: -webkit-fill-available;">
+
+  <div class="card-deck">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Analisis de Estacionalidad</h5>
+        <p class="card-text"></p>
+
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Niveles de Inventario</h5>
+        <p class="card-text"> Existencia Actual por Producto</p>
+      </div>
+    </div>
+    <!-- Agrega más cards según sea necesario -->
+  </div>
+
+</div>
+
+<!-- Sección de Gráficos -->
+<div class="container mt-6" style="max-width: -webkit-fill-available;">
+  <div class="row">
+    <div class="col-md-6 ">
+      <!-- Gráfico de Barra -->
+
+      <canvas id="analisisEstacionalidad" width="400" height="400"></canvas>
+    </div>
+    <div class="col-md-6">
+      <!-- Gráfico Barra -->
+      <canvas id="graficoBarra" width="400" height="400"></canvas>
+
+    </div>
+  </div>
+</div>
+
+<script>
+ var dataEstacionalidad = {{ data_analisis_estacionalidad_month|safe }};
+    var ctxLineas = document.getElementById('analisisEstacionalidad').getContext('2d');
+
+    // Verificar si la variable es un objeto JavaScript
+    if (typeof dataEstacionalidad === 'string') {
+        // Convertir la cadena JSON a un objeto JavaScript
+        try {
+            dataEstacionalidad = JSON.parse(dataEstacionalidad);
+        } catch (e) {
+            console.error('Error al analizar JSON:', e);
+            dataEstacionalidad = [];
+        }
+    }
+
+  // Filtrar fechas para el año 2023
+var fechas2023 = dataEstacionalidad[0].stockByDate
+    .filter(stockData => stockData.date.startsWith('2023'))
+    .map(stockData => stockData.date);
+
+// Configuración de gráfico de líneas
+var datosLineas = {
+    labels: fechas2023,
+    datasets: dataEstacionalidad.map(item => {
+        return {
+            label: item.productName.length > 6 ? item.productName.substring(0, 6) : item.nombre_producto,
+            hidden: true,
+            data: item.stockByDate
+                .filter(stockData => stockData.date.startsWith('2023'))
+                .map(stockData => {
+                    return {
+                        x: stockData.date,
+                        y: stockData.stock
+                    };
+                }),
+            fill: false,
+            borderColor: getRandomColor(),  // Puedes personalizar el color o generar uno aleatorio
+        };
+    }),
+};
+// Función para generar colores aleatorios
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+    // Configuración de los gráficos
+    var opciones = {
+        responsive: true,
+        maintainAspectRatio: false,
+    };
+
+    new Chart(ctxLineas, {
+        type: 'line',
+        data: datosLineas,
+        options: opciones,
+    
+    });
+  </script>

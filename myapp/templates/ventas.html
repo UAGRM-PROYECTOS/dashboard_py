@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard with Flexmonster</title>
+    <script src="https://cdn.flexmonster.com/flexmonster.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.flexmonster.com/demo.css">
+  </head>
+  <body>
+    
+  <!-- Contenido de flexmonster.html -->
+<!-- Contenido de flexmonster.html -->
+
+
+<!-- Contenedor para el gráfico de barras -->
+<div id="pivot-chart-container"></div>
+
+
+
+
+<script>
+  // Hacer una solicitud a la API de Laravel
+  fetch('http://144.22.133.47:8000/api/get-list')
+    .then(response => response.json())
+    .then(data => {
+      // Verificar si hay datos y al menos un elemento en facturas
+      if (data && data.facturas && data.facturas.length > 0) {
+        // Formatear los datos para Flexmonster
+        const flexmonsterData = {
+          data: data.facturas,
+          options: {
+            grid: {
+              type: 'flat',
+              showGrandTotals: 'off',
+            },
+            chart: {
+              active: true,
+              type: 'bar',
+              showFilter: true,
+            },
+            datePattern: 'yyyy-MM-dd',
+          },
+          slice: {
+            rows: [
+              { uniqueName: 'fecha' },
+            ],
+            columns: [
+              { uniqueName: 'Total', aggregation: 'sum' },
+            ],
+          },
+        };
+
+        // Inicializar Flexmonster con los datos obtenidos
+        new Flexmonster({
+          container: '#pivot-chart-container',
+          componentFolder: "https://cdn.flexmonster.com/",
+          toolbar: true,
+          licenseKey: 'Z7VG-XDAJ14-503B2B-66516J',
+          report: flexmonsterData,
+        });
+      } else {
+        console.error('Datos de facturas no válidos o vacíos.');
+      }
+    })
+    .catch(error => console.error('Error al obtener datos:', error));
+</script>
+
+
+</body>
+</html>
