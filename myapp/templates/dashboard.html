@@ -18,29 +18,25 @@
 
                 <!-- Card stats -->
                 <div class="row">
-                  <!--ventas total-->
-                  {% include 'ventas_totales.html' %}
-                  <!--Tasa de Obsolencia-->
-                  {% include 'tasa_obsolencia.html' %}
-                  <!--Rotacion Inventario-->
-                  {% include 'rotacion_inventario.html' %}
-                  <!--Valor Inventario-->
-                  {% include 'valor_inventario.html' %}
+                  <!--Cantidad de visitas a la pagina
+                  {% include 'visitas_totales.html' %}-->
+                  <!--Visitas de la ultima semana-->
+
 
                 </div>
 
-                <!--Analisis de estacionalidad y Nivel de Inventario-->
+                <!--Analisis de estacionalidad-Noticias mas vistas-->
                 {% include 'analisis_estacionalidad.html' %}
 
                 <!-- Sección de Lista de Ventas y Gráfico Pastel -->
 
                 <div class="row">
-                  <!-- Gráfico Pastel-Tendencias -->
-                  {% include 'tendencias_temporada.html' %}
+                  <!-- Gráfico Pastel-tendencias_ultimo_mes -->
+                  {% include 'tendencias_ultimo_mes.html' %}
                   <!-- Gráfico de Crecimiento Lineal -->
 
-                  <!-- Lista de Ventas -->
-                  {% include 'productos_vencer.html' %}
+                  <!-- Lista de visitas_x_categorias -->
+                   <!-- {% include 'visitas_x_categorias.html' %}-->
 
                 </div>
 
@@ -53,7 +49,7 @@
       {% load static %}
     </div>
     <!-- Configuración de los Gráficos con Chart.js -->
-     <script src="{% static 'graficaschartjs.js' %}"></script>
+      <!-- <script src="{% static 'graficaschartjs.js' %}"></script>-->
 
      <!-- Tendencia-->
      <!--<script src="{% static 'tendencias_temporada.js' %}"></script>-->

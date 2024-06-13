@@ -13,6 +13,7 @@ class Fechas(models.Model):
 class PublicationStatu(models.Model):
     name =models.CharField(max_length=255)
     description=models.CharField(max_length=255)
+    views=models.PositiveIntegerField()
 
 class Administrative(models.Model):
     administrativeId=models.PositiveIntegerField()
@@ -44,8 +45,8 @@ class ElementVideo(models.Model):
 
 class Element(models.Model):
     titulo =models.CharField(max_length=255)
-    video_url =models.URLField(max_length=100)
-    type_element=models.DateField()
+    video_url =models.URLField(max_length=255)
+    type_element=models.CharField(max_length=255)
     elementPresnet_id=models.PositiveIntegerField()
     elementVideo_id=models.PositiveIntegerField()
 

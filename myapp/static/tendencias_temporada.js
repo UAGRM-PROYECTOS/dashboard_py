@@ -1,4 +1,4 @@
-var dataTendenciaTemporada = JSON.parse('{{ data_tendencia_temporada_month|safe }}');
+var dataTendenciaTemporada = JSON.parse('{{ data_top_three_news|safe }}');
     
 // Verificar si la variable es un objeto JavaScript
 if (typeof dataTendenciaTemporada === 'string') {
@@ -13,7 +13,7 @@ if (typeof dataTendenciaTemporada === 'string') {
     
 // Configuración de gráfico de pastel
 var datosPastel = {
-    labels: dataTendenciaTemporada.map(item => item.productName),
+    labels: dataTendenciaTemporada.map(item => item.titulo),
     datasets: [{
         data: dataTendenciaTemporada.map(item => item.percentage),
         backgroundColor: ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)'],

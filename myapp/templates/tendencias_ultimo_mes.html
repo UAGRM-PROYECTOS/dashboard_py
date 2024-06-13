@@ -4,15 +4,15 @@
   <div class="card-deck" >
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Tendencias de Temporada</h5>
+        <h5 class="card-title">Top 3 Tendencias del ultimo mes</h5>
         <p class="card-text"></p>
       
       </div>
     </div>
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Pronostico de demandas</h5>
-        <p class="card-text">Precisión del Pronóstico de Demanda</p>
+        <h3 class="card-title">Vistas por categorias</h3>
+        <p>Vistas totales recibidas por categorias</p>
       </div>
     </div>
     <!-- Agrega más cards según sea necesario -->
@@ -26,11 +26,11 @@
 
 </div>
 
-<!--Prdiccion demandas-->
-{% include 'prediccion_demandas.html' %}
+ <!-- Lista de visitas_x_categorias -->
+ {% include 'visitas_x_categorias.html' %}
 
 <script>
-var dataTendenciaTemporada = {{ data_tendencia_temporada_month|safe }};
+var dataTendenciaTemporada = {{ data_top_three_news|safe }};
   
   // Verificar si la variable es un objeto JavaScript
   if (typeof dataTendenciaTemporada === 'string') {
@@ -45,7 +45,7 @@ var dataTendenciaTemporada = {{ data_tendencia_temporada_month|safe }};
       
   // Configuración de gráfico de pastel
   var datosPastel = {
-      labels: dataTendenciaTemporada.map(item => item.productName),
+      labels: dataTendenciaTemporada.map(item => item.content),
       datasets: [{
           data: dataTendenciaTemporada.map(item => item.percentage),
           backgroundColor: ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)'],

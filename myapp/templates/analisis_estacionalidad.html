@@ -4,14 +4,14 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Analisis de Estacionalidad</h5>
-        <p class="card-text"></p>
+        <p class="card-text">Los topics mas repetidos por mes</p>
 
       </div>
     </div>
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Niveles de Inventario</h5>
-        <p class="card-text"> Existencia Actual por Producto</p>
+        <h5 class="card-title">Presentadores mas sobresalientes</h5>
+        <p class="card-text"> Prsentadores que mas vistas recibieron</p>
       </div>
     </div>
     <!-- Agrega más cards según sea necesario -->
@@ -36,45 +36,77 @@
 </div>
 
 <script>
- var dataEstacionalidad = {{ data_analisis_estacionalidad_month|safe }};
-    var ctxLineas = document.getElementById('analisisEstacionalidad').getContext('2d');
+// Obtener los datos de Python y convertirlos a JavaScript
+var dataTopicsByMonth = JSON.parse('{{ data_topics_by_month|safe }}');
 
-    // Verificar si la variable es un objeto JavaScript
-    if (typeof dataEstacionalidad === 'string') {
-        // Convertir la cadena JSON a un objeto JavaScript
-        try {
-            dataEstacionalidad = JSON.parse(dataEstacionalidad);
-        } catch (e) {
-            console.error('Error al analizar JSON:', e);
-            dataEstacionalidad = [];
+// Inicializar variables para el gráfico
+var ctx = document.getElementById('analisisEstacionalidad').getContext('2d');
+var datasets = [];
+var labels = [];
+
+// Procesar datos para el gráfico de líneas
+for (var month in dataTopicsByMonth) {
+    if (dataTopicsByMonth.hasOwnProperty(month)) {
+        labels.push(month);  // Agregar mes como etiqueta
+        
+        // Obtener el tema más repetido para este mes
+        var topics = dataTopicsByMonth[month];
+        var topicCounts = {};
+        
+        // Contar la frecuencia de cada tema
+        topics.forEach(function(topic) {
+            if (topic in topicCounts) {
+                topicCounts[topic]++;
+            } else {
+                topicCounts[topic] = 1;
+            }
+        });
+        
+        // Encontrar el tema con mayor frecuencia
+        var maxTopic = null;
+        var maxCount = -1;
+        
+        Object.keys(topicCounts).forEach(function(key) {
+            if (topicCounts[key] > maxCount) {
+                maxTopic = key;
+                maxCount = topicCounts[key];
+            }
+        });
+
+        // Crear un nuevo dataset para este mes con el tema más repetido
+        datasets.push({
+            label: maxTopic,
+            data: [{ x: month, y: maxCount }],
+            borderColor: getRandomColor(),  // Color aleatorio para cada mes (implementa tu lógica de color)
+            fill: false
+        });
+    }
+}
+
+// Configuración del gráfico
+var chartOptions = {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: datasets
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    stepSize: 1  // Establece el incremento de 1 en 1 en el eje y
+                }
+            }]
         }
     }
-
-  // Filtrar fechas para el año 2023
-var fechas2023 = dataEstacionalidad[0].stockByDate
-    .filter(stockData => stockData.date.startsWith('2023'))
-    .map(stockData => stockData.date);
-
-// Configuración de gráfico de líneas
-var datosLineas = {
-    labels: fechas2023,
-    datasets: dataEstacionalidad.map(item => {
-        return {
-            label: item.productName.length > 6 ? item.productName.substring(0, 6) : item.nombre_producto,
-            hidden: true,
-            data: item.stockByDate
-                .filter(stockData => stockData.date.startsWith('2023'))
-                .map(stockData => {
-                    return {
-                        x: stockData.date,
-                        y: stockData.stock
-                    };
-                }),
-            fill: false,
-            borderColor: getRandomColor(),  // Puedes personalizar el color o generar uno aleatorio
-        };
-    }),
 };
+
+// Crear el gráfico de líneas
+var lineChart = new Chart(ctx, chartOptions);
+
 // Función para generar colores aleatorios
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
@@ -84,16 +116,60 @@ function getRandomColor() {
     }
     return color;
 }
-    // Configuración de los gráficos
-    var opciones = {
-        responsive: true,
-        maintainAspectRatio: false,
-    };
 
-    new Chart(ctxLineas, {
-        type: 'line',
-        data: datosLineas,
-        options: opciones,
-    
-    });
+
+</script>
+  <script>
+  
+var data_top_most_viewed_presenter = JSON.parse('{{ data_top_most_viewed_presenter|safe }}');
+
+if (typeof data_top_most_viewed_presenter === 'string') {
+    try {
+      data_top_most_viewed_presenter = JSON.parse(data_top_most_viewed_presenter);
+    } catch (e) {
+        console.error('Error al analizar JSON:', e);
+        data_top_most_viewed_presenter = [];
+    }
+}
+// Definir colores diferentes para cada barra
+var colores = [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+            'rgba(153, 102, 255, 0.5)'
+        ];
+
+        var coloresBorde = [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)'
+        ];
+
+        //console.log('data_top_most_viewed_presenter:', data_top_most_viewed_presenter);
+var datosBarra = {
+    labels: data_top_most_viewed_presenter.map(item => item.full_name),
+    datasets: [{
+        label: 'Cantidad de Vistas',
+        data: data_top_most_viewed_presenter.map(item => item.views),
+        backgroundColor: colores,
+        borderColor: coloresBorde,
+        borderWidth: 1
+    }]
+};
+
+var opciones = {
+    responsive: true,
+    maintainAspectRatio: false,
+};
+
+var ctxBarra = document.getElementById('graficoBarra').getContext('2d');
+new Chart(ctxBarra, {
+    type: 'bar',
+    data: datosBarra,
+    options: opciones,
+});
+  
   </script>

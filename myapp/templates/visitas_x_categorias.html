@@ -1,0 +1,37 @@
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-body">
+           
+            {% if data_category_views_list %}
+               
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Alert</th>
+                            <th>Categorias</th>
+                            <th>Views</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      {% for categoria in data_category_views_list %}
+                      <tr>
+                        <td>
+                            <i class="fas fa-exclamation-triangle text-danger"></i>
+                        </td>
+                          
+                          <td>{{ categoria.description }}</td>
+                          <td>{{ categoria.views }}</td>
+                          
+                         
+                      </tr>
+                  {% endfor %}
+                  
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No hay datos disponibles</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
