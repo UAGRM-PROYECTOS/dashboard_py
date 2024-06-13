@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'dashboard.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
+        'HOST': 'bxq6wifup5aqvmk2yvzu-mysql.services.clever-cloud.com',
         'PORT': '3306',
-        'USER': 'root',
-        'PASSWORD': '',
-        'NAME': 'dashboard_db',
+        'USER': 'udqspa9g4bp10csy',
+        'PASSWORD': 'srCRS3ikX538jChyQ0Xv',
+        'NAME': 'bxq6wifup5aqvmk2yvzu',
     }
 }
 
