@@ -121,16 +121,16 @@ class NewsViewSet(viewsets.ModelViewSet):
 def get_services_enpoints(request):
     # Hacer una solicitud a la API de Laravel para datos de productos próximos a vencer
     #Visitas
-    url_visitas = 'http://127.0.0.1:8000/myapp/dashboard/publication/'#'http://34.151.236.58:3000/api/show/next-expired-products'
+    url_visitas = 'https://dashboard-py.onrender.com/myapp/dashboard/publication/'#'http://34.151.236.58:3000/api/show/next-expired-products'
     response_visitas = requests.get(url_visitas)
     #News
-    url_news = 'http://127.0.0.1:8000/myapp/dashboard/news/'#'http://34.151.236.58:3000/api/show/next-expired-products'
+    url_news = 'https://dashboard-py.onrender.com/dashboard/news/'#'http://34.151.236.58:3000/api/show/next-expired-products'
     response_news = requests.get(url_news)
     #Projects
-    url_projects = 'http://127.0.0.1:8000/myapp/dashboard/project/'#'http://34.151.236.58:3000/api/show/next-expired-products'
+    url_projects = 'https://dashboard-py.onrender.com/dashboard/project/'#'http://34.151.236.58:3000/api/show/next-expired-products'
     response_projects = requests.get(url_projects)
     #Presenter
-    url_presenter = 'http://127.0.0.1:8000/myapp/dashboard/presenter/'#'http://34.151.236.58:3000/api/show/next-expired-products'
+    url_presenter = 'https://dashboard-py.onrender.com/dashboard/presenter/'#'http://34.151.236.58:3000/api/show/next-expired-products'
     response_presenter = requests.get(url_presenter)
 
 
