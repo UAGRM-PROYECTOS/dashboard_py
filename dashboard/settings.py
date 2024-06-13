@@ -12,9 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,7 +26,7 @@ SECRET_KEY = 'django-insecure-1b#$-zkpzmyxp*)1-#j@yc#x%7!e-!9n0^jzid73h9#(e!^yn(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['dashboard-py.onrender.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -85,11 +82,11 @@ WSGI_APPLICATION = 'dashboard.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': os.getenv('DB_HOST', 'bxq6wifup5aqvmk2yvzu-mysql.services.clever-cloud.com'),
-        'PORT': os.getenv('DB_PORT', '3306'),
-        'USER': os.getenv('DB_USER', 'udqspa9g4bp10csy'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'srCRS3ikX538jChyQ0Xv'),
-        'NAME': os.getenv('DB_NAME', 'bxq6wifup5aqvmk2yvzu'),
+        'HOST': 'bxq6wifup5aqvmk2yvzu-mysql.services.clever-cloud.com',
+        'PORT': '3306',
+        'USER': 'udqspa9g4bp10csy',
+        'PASSWORD': 'srCRS3ikX538jChyQ0Xv',
+        'NAME': 'bxq6wifup5aqvmk2yvzu',
     }
 }
 

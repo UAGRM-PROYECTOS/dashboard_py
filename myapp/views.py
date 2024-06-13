@@ -124,13 +124,13 @@ def get_services_enpoints(request):
     url_visitas = 'https://dashboard-py.onrender.com/myapp/dashboard/publication/'#'http://34.151.236.58:3000/api/show/next-expired-products'
     response_visitas = requests.get(url_visitas)
     #News
-    url_news = 'https://dashboard-py.onrender.com/dashboard/news/'#'http://34.151.236.58:3000/api/show/next-expired-products'
+    url_news = 'https://dashboard-py.onrender.com/myapp/dashboard/news/'#'http://34.151.236.58:3000/api/show/next-expired-products'
     response_news = requests.get(url_news)
     #Projects
-    url_projects = 'https://dashboard-py.onrender.com/dashboard/project/'#'http://34.151.236.58:3000/api/show/next-expired-products'
+    url_projects = 'https://dashboard-py.onrender.com/myapp/dashboard/project/'#'http://34.151.236.58:3000/api/show/next-expired-products'
     response_projects = requests.get(url_projects)
     #Presenter
-    url_presenter = 'https://dashboard-py.onrender.com/dashboard/presenter/'#'http://34.151.236.58:3000/api/show/next-expired-products'
+    url_presenter = 'https://dashboard-py.onrender.com/myapp/dashboard/presenter/'#'http://34.151.236.58:3000/api/show/next-expired-products'
     response_presenter = requests.get(url_presenter)
 
 
