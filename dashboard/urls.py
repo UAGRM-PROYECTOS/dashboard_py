@@ -21,7 +21,7 @@ from myapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('myapp/dashboard/', include('myapp.urls')),
-    path('dashboard/', views.get_services_enpoints,),
+    path('dashboard/', views.get_services_enpoints, name='dashboard'),
   
   # URL for handling GET requests
     #path('fechas/', views.fechas_views, name='fechas_views_get'),
