@@ -1,0 +1,16 @@
+{
+    "version": 1,
+    "builds": [
+        {
+            "src": "vercel-handler.py",
+            "use": "@vercel/python"
+          },
+          {
+            "src": "requirements.txt",
+            "use": "@vercel/python"
+          }
+        ],
+    "routes": [
+      { "src": "/(.*)", "dest": "/vercel-handler.py" }
+    ]
+  }
