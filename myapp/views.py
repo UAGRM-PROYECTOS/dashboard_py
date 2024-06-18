@@ -231,9 +231,9 @@ def get_services_enpoints(request):
             continue
 
         # Imprimir resultados (puedes hacer más análisis aquí)
-        for month, topics in topics_by_month.items():
-            print(f"Mes: {month}, Cantidad de noticias: {len(topics)}")
-            print(f"Temas: {topics}")
+        #for month, topics in topics_by_month.items():
+           # print(f"Mes: {month}, Cantidad de noticias: {len(topics)}")
+            #print(f"Temas: {topics}")
 
         #----------------------------------------------------------------------------------------------------------------------
         # Procesar los datos y enviarlos al contexto
