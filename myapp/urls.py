@@ -15,7 +15,8 @@ router.register(r'elementpresenter', views.ElementPresenterViewSet)
 router.register(r'elementvideo', views.ElementVideoViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('routes/', include(router.urls)),
+    path('', views.get_services_enpoints, name='dashboard' ),
     #path('', views.dashboard, name='dashboard'),
     #path('data', views.pivot_data, name='pivot_data'),
 ]   
