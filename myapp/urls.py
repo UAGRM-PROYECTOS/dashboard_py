@@ -16,5 +16,5 @@ router.register(r'elementvideo', views.ElementVideoViewSet)
 
 urlpatterns = [
     path('routes/', include(router.urls)),
-    path('', views.get_services_enpoints, name='dashboard' ),
+    path('dashboard/', views.get_services_enpoints, name='dashboard' ),
 ]   
