@@ -20,8 +20,7 @@ from myapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('myapp/dashboard/', include('myapp.urls')),
-    path('', include('myapp.urls')),
+    path('dashboard/', include('myapp.urls')),
   # URL for handling GET requests
     #path('fechas/', views.fechas_views, name='fechas_views_get'),
 
